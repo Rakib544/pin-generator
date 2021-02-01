@@ -57,8 +57,8 @@
     <script>
         //creating generate pin functionality
         const generatePin = () => {
-            const pin = ((Math.random()*100000000).toString()).split('.')[0];
-            if(pin.length >= 8 ) {
+            const pin = ((Math.random()*10000).toString()).split('.')[0];
+            if(pin.length >= 4 ) {
                 document.getElementById('show-pin').value = pin;
             } else {
                 return generatePin();
@@ -71,11 +71,19 @@
             const digit = event.target.innerText;
             
             if(isNaN(digit)) {
-                //some code goes here
+                if(event.target.innerText === 'C') {
+                    document.getElementById('typed-pin').value = ""
+                } else if(event.target.innerText === '<') {
+                    document.getElementById('typed-pin').value = parseInt(document.getElementById('typed-pin').value) / 10;
+                }
             } else {
                 document.getElementById('typed-pin').value += digit;
             }
         }
+
+
+        //handle clear button
+
 
         
         //compare two input value
@@ -94,8 +102,9 @@
         //display match or don't match message
         const verifyMassage = (isMatch, notMatch) => {
             document.getElementById('match').style.display = isMatch;
-            document.getElementById('dont-match').style.display = notMatch;
+            document.getElementById('not-match').style.display = notMatch;
         }
+
     </script>
 </body>
 </html>
